@@ -1,0 +1,136 @@
+<html>
+	<head>
+	<link rel="stylesheet" href="slider.css" >
+
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+	</head>
+	<body>
+		<div id="slider">
+			<ul class="items">
+				<!--<li class="active">
+        			
+					<img src="images/parl.jpg">-
+				</li>
+				<li>
+        		
+					<img src="images/russia.jpg">-
+				</li>
+				<li>
+        			
+					<img src="images/3488.jpg">-
+				</li>
+				<li>
+        			
+        			<img src="images/green.jpg">
+				</li>-->
+			</ul>
+			
+			<p class="radiobtn">
+				 <button id="slide" onclick="btn1()"> </button>
+				 <button id="slide" onclick="btn2()" > </button>
+				 <button id="slide" onclick="btn3()" > </button>
+				 <button id="slide" onclick="btn4()" ></button>
+			</p>
+			<div id="prevnext">
+			<button onclick="prev()">Prev</button>
+			<button onclick="next()">Next</button>
+			</div>
+		</div>
+		<script type="text/javascript">
+			
+			var $slider = $('#slider'),
+				$ul = $slider.find('ul');
+
+			function prev()
+			{
+				
+				var $active = $ul.find('.active'),
+					$next = $active.prev('li').length ? $active.prev('li') : $ul.find('li:last-child');
+					
+
+				$active.addClass('ltr-exit');
+				$next.addClass('next-active')
+					.addClass('ltr-enter');
+
+				setTimeout(function() {
+					$active.removeClass('ltr-exit')
+						.removeClass('active');
+
+					$next.removeClass('ltr-enter')
+						.removeClass('next-active')
+						.addClass('active');
+				}, 1000);
+			  
+			}
+			function next()
+			{
+					
+				var $active = $ul.find('.active'),
+					$next = $active.next('li').length ? $active.next('li') : $ul.find('li:first-child');
+					setInterval(actionrtl($active,$next));
+			}
+
+			function actionrtl($active,$next)
+			{
+				$active.addClass('rtl-exit');
+				$next.addClass('next-active')
+					.addClass('rtl-enter');
+
+				setTimeout(function() {
+					$active.removeClass('rtl-exit')
+						.removeClass('active');
+
+					$next.removeClass('rtl-enter')
+						.removeClass('next-active')
+						.addClass('active');
+				}, 1000);
+			}
+
+			function btn1()
+			{
+				var $active = $ul.find('.active'),
+					$next = $ul.find('li:nth-child(1)');
+					setInterval(actionrtl($active,$next));
+			}
+
+			function btn2()
+			{
+				var $active = $ul.find('.active'),
+					$next = $ul.find('li:nth-child(2)');
+				setInterval(actionrtl($active,$next));
+			}
+
+			function btn3()
+			{
+				var $active = $ul.find('.active'),
+					$next = $ul.find('li:nth-child(3)');
+				setInterval(actionrtl($active,$next));
+			}
+
+			function btn4()
+			{
+				var $active = $ul.find('.active'),
+					$next = $ul.find('li:nth-child(4)');
+				setInterval(actionrtl($active,$next));
+			}
+
+			var json = {
+   			"image": [
+    				{"images": "parl.jpg"},
+    				{"images": "russia.jpg"},
+    				{"images": "3488.jpg"},
+    				{"images": "green.jpg"}
+    				]};
+
+					var output = ""; 
+					$.each(json.image,function()
+					{
+   							output += '<li><img src= "'+this.images+'"></li>';
+					});
+					$('.items').append(output);
+
+			//setInterval(next, 6000);
+		
+		</script>
+	</body>
+</html>
